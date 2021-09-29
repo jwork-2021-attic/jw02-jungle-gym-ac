@@ -1,0 +1,35 @@
+@startuml
+
+participant Scene as scene #Blue
+actor Geezer as geezer  #HotPink
+entity Line  as line #white
+entity Sorter as sorter #Yellow
+entity Log as log
+
+==初始化==
+create line
+scene -> line:new
+
+line -> line :put()
+note right:放置七个葫芦娃
+
+create geezer
+scene ->geezer:class Geezer的getTheGeezer方法中 new
+
+create sorter
+scene ->sorter:new
+
+geezer -> sorter:setSorter(sorter)
+
+==排序==
+geezer -> line : lineUp
+create log
+geezer ->log :lineUp(Line)
+==输出==
+create writer
+scene->writer:new
+scene->writer:write
+scene->writer:flush
+scene->writer:close
+
+@enduml

@@ -1,0 +1,66 @@
+@startuml classes
+
+
+
+class Geezer{
+    Geezer theGeezer    
+    Sorter sorter
+    getTheGeezer()
+    setSorter()
+    lineUp()
+    parsePlan()
+    execute()
+}
+
+interface Sorter{
+    load()
+    sort()
+    getPlan()
+}
+class BubbleSorter{
+    int[] a
+    String plan
+    swap()
+}
+
+interface Linable{
+    setPosition()
+    getPosition()
+    getValue()
+}
+
+class Line{
+    Position[] positions
+    put()
+    get()
+    toString()
+    toArray()
+}
+
+class Gourd {
+    int r,g,b
+    Position position
+    getGourdByRank()
+    rank()
+    swapPosition()
+}
+
+class Position{
+    Linable linable
+    setLinable()
+}
+
+Linable  --o   Position :聚合
+Position  --o  Gourd :聚合
+Sorter --o Geezer :聚合
+Position "many"--*  "one" Line   :组合
+
+
+Gourd ..|>Linable :实现
+BubbleSorter..|> Sorter :实现
+
+Position +-- Line :内部类
+
+
+
+@enduml

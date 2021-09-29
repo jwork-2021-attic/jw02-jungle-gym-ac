@@ -1,0 +1,74 @@
+@startuml classes
+
+
+
+class Snake{
+    Snake theSnake   
+    Sorter sorter
+    getTheSnake()
+    setSorter()
+    lineUp()
+    parsePlan()
+    execute()
+}
+
+interface Sorter{
+    load()
+    sort()
+    getPlan()
+}
+class SelectSorter{
+    int[] a
+    String plan
+    swap()
+}
+class QuickSorter{
+    int[] a
+    String plan
+    swap()
+    quickSort()
+}
+
+interface Linable{
+    setPosition()
+    getPosition()
+    getValue()
+}
+
+class Line{
+    Position[] positions
+    put()
+    get()
+    toString()
+    toArray()
+}
+
+class Monster {
+    int r,g,b,rank
+    Position position
+    static Monster[] theMonsters;
+    getMonsterByRank()
+    swapPosition()
+    getValue()
+}
+
+class Position{
+    Linable linable
+    setLinable()
+}
+
+Linable  --o   Position :聚合
+Position --o   Monster :聚合
+Sorter --o Snake :聚合
+Position "many" --* "one" Line   :组合
+
+
+Monster ..|>Linable :实现
+SelectSorter..|> Sorter :实现
+QuickSorter..|> Sorter :实现
+
+Position +-- Line :内部类
+
+
+
+@enduml
